@@ -2,13 +2,6 @@
 
 設計判断が必要な（実現手段に選択肢がある）項目。
 
-## 1. Java ランタイムの選択
-
-PlantUML の実行に JRE が必要。どのディストリビューション・バージョンを使うかが未定。
-
-- `openjdk-xx-jre-headless`（debian パッケージ）
-- Eclipse Temurin など upstream イメージからコピー
-
 ## 3. Graphviz の扱い
 
 PlantUML の一部の図種（クラス図など）は Graphviz を必要とする。

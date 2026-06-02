@@ -64,6 +64,30 @@ apt・公式 Docker イメージからのコピーとの比較において、以
 - PlantUML は公式リリースに `.sha256` ファイルを提供していないため、チェックサム値の自前管理が必要になる
 - バージョンアップのたびにチェックサム値も更新する運用コストが生じ、`ARG` の値を書き換えるだけというシンプルな運用が崩れる
 
+## Graphviz のインストール方式
+
+### 概要
+
+PlantUML が必要とする Graphviz をインストールする方式を定める。
+
+### 方式
+
+Debian パッケージの `graphviz` を `apt-get install` でインストールする。
+
+```dockerfile
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    graphviz \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+### 採用理由
+
+インストールしない（Graphviz 不要な図種のみサポート）との比較において、以下の理由でインストールを採用した。
+
+- **対応図種の広さ**: クラス図・コンポーネント図・オブジェクト図・アクティビティ図（v1）など、Graphviz が必要な図種は多い。インストールしない場合、ユーザーが図種を書いた際に PlantUML がエラーを返すが、その原因が分かりにくく混乱を招きやすい
+- **汎用性**: mdBook ビルド用の汎用イメージとして、図種の制限を設けないほうが実用的である
+- **シンプルさ**: `apt-get install --no-install-recommends graphviz` 1行で済み、Java ランタイムの方式と一貫性がある
+
 ## Java ランタイムのインストール方式
 
 ### 概要

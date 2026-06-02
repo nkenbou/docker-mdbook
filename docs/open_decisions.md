@@ -2,13 +2,6 @@
 
 設計判断が必要な（実現手段に選択肢がある）項目。
 
-## 3. マルチアーキテクチャビルドの実現方法
-
-GitHub Actions での `amd64`/`arm64` 対応をどう実装するか。
-
-- `docker buildx bake` を使う
-- `docker buildx build --platform linux/amd64,linux/arm64` を直接指定する
-
 ## 5. イメージタグ戦略
 
 GHCR に push する際のタグ命名規則が未定。

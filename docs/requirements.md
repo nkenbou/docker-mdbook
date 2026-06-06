@@ -14,6 +14,29 @@ PlantUML はネットワーク越しの使用を避け、コンテナ内でロ�
 | mdbook-mermaid | https://github.com/badboy/mdbook-mermaid |
 | PlantUML | https://github.com/plantuml/plantuml |
 
+### イメージ内ツール構成
+
+```plantuml
+@startuml
+skinparam componentStyle rectangle
+
+package "Docker Image (debian:bookworm-slim)" {
+  component [mdbook] as mdbook
+  component [mdbook-plantuml] as plantuml_plugin
+  component [mdbook-mermaid] as mermaid_plugin
+  component [PlantUML JAR] as plantuml
+  component [Graphviz] as graphviz
+  component [OpenJDK 17] as java
+  component [fonts-noto-cjk] as fonts
+}
+
+plantuml_plugin --> plantuml : calls
+plantuml --> graphviz : uses
+plantuml --> java : runs on
+plantuml --> fonts : CJK rendering
+@enduml
+```
+
 ## 機能要件
 
 ### コンテナの使い方
@@ -48,3 +71,12 @@ PlantUML をコンテナ内でローカル実行し、外部サーバーへの�
 - Dockerfile などのソースは GitHub リポジトリで管理する
 - ビルド済みイメージは GHCR（GitHub Container Registry）で公開する
 - `main` ブランチへのプッシュ時に GitHub Actions でイメージを自動ビルド・プッシュする
+
+### CI/CD フロー
+
+```mermaid
+flowchart LR
+    push["git push\n(main)"] --> gha["GitHub Actions"]
+    gha --> build["Docker Build\nlinux/amd64\nlinux/arm64"]
+    build --> ghcr["GHCR\nghcr.io/nkenbou/\ndocker-mdbook"]
+```

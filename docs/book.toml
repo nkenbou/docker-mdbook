@@ -1,0 +1,14 @@
+[book]
+title = "docker-mdbook"
+authors = ["nkenbou"]
+language = "ja"
+src = "."
+
+[preprocessor.plantuml]
+plantuml-cmd = "plantuml"
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
+
+[output.html]
+additional-js = [".mdbook/mermaid.min.js", ".mdbook/mermaid-init.js"]

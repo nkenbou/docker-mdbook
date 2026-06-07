@@ -19,6 +19,21 @@ case "${1:-}" in
     echo "ビルド成果物とキャッシュを削除しました"
     exit 0
     ;;
+  install-assets)
+    WORK_DIR=$(mktemp -d)
+    trap 'rm -rf "${WORK_DIR}"' EXIT
+    echo '[book]' > "${WORK_DIR}/book.toml"
+    docker run --rm \
+      --entrypoint mdbook-mermaid \
+      --user "$(id -u):$(id -g)" \
+      -v "${WORK_DIR}:/work" \
+      "${IMAGE}" \
+      install /work
+    cp "${WORK_DIR}/mermaid.min.js"  "${BOOK_DIR}/.mdbook/mermaid.min.js"
+    cp "${WORK_DIR}/mermaid-init.js" "${BOOK_DIR}/.mdbook/mermaid-init.js"
+    echo "mermaid アセットを更新しました"
+    exit 0
+    ;;
   serve|watch)
     PORT_ARGS="-p ${PORT}:3000"
     DETACH_ARGS="-d"

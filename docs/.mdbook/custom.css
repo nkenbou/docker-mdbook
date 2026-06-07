@@ -1,0 +1,11 @@
+:root {
+  --content-max-width: calc(100% - 180px);
+}
+
+.table-wrapper table {
+  margin: 0 0;
+}
+
+.table-wrapper:has(+ .table-wrapper) {
+  margin-bottom: 1em;
+}

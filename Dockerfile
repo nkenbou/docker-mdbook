@@ -15,7 +15,7 @@ RUN cargo install mdbook-mermaid --version ${MDBOOK_MERMAID_VERSION}
 FROM debian:bookworm-slim AS downloader
 ARG PLANTUML_VERSION
 ARG PLANTUML_SHA256
-RUN apt-get update && apt-get install -y --no-install-recommends wget \
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates wget \
     && rm -rf /var/lib/apt/lists/*
 RUN wget -q -O /plantuml.jar \
     https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar \

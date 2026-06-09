@@ -83,9 +83,14 @@ Tool versions are pinned via `ARG` in the `Dockerfile`. To update a version, cha
 docker build -t docker-mdbook .
 ```
 
+## Documentation
+
+The `docs/` directory is published to GitHub Pages:
+**https://nkenbou.github.io/docker-mdbook/**
+
 ## CI/CD
 
-GitHub Actions automatically builds a multi-architecture image on every push to `main`. The image is published to GHCR only on tag pushes (`v*`).
+GitHub Actions automatically builds a multi-architecture image on every push to `main`. The image is published to GHCR only on tag pushes (`v*`). The documentation is also automatically deployed to GitHub Pages on every push to `main`.
 
 ## License
 

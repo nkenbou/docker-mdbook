@@ -83,9 +83,14 @@ docker pull ghcr.io/nkenbou/docker-mdbook:latest
 docker build -t docker-mdbook .
 ```
 
+## ドキュメント
+
+`docs/` ディレクトリの内容が GitHub Pages に公開されています：
+**https://nkenbou.github.io/docker-mdbook/**
+
 ## CI/CD
 
-`main` ブランチへのプッシュ時に GitHub Actions でマルチアーキテクチャイメージを自動ビルドし、タグ（`v*`）プッシュ時に GHCR へ公開します。
+`main` ブランチへのプッシュ時に GitHub Actions でマルチアーキテクチャイメージを自動ビルドし、タグ（`v*`）プッシュ時に GHCR へ公開します。ドキュメントも `main` へのプッシュ時に GitHub Pages へ自動デプロイされます。
 
 ## ライセンス
 

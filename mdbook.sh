@@ -16,7 +16,7 @@ case "${1:-}" in
     ;;
   clean)
     rm -rf "${BOOK_DIR}/book" "${BOOK_DIR}/.mdbook-plantuml-cache"
-    echo "ビルド成果物とキャッシュを削除しました"
+    echo "Removed build artifacts and cache."
     exit 0
     ;;
   install-assets)
@@ -31,7 +31,7 @@ case "${1:-}" in
       install /work
     cp "${WORK_DIR}/mermaid.min.js"  "${BOOK_DIR}/.mdbook/mermaid.min.js"
     cp "${WORK_DIR}/mermaid-init.js" "${BOOK_DIR}/.mdbook/mermaid-init.js"
-    echo "mermaid アセットを更新しました"
+    echo "Updated mermaid assets."
     exit 0
     ;;
   serve|watch)
@@ -52,7 +52,7 @@ docker run --rm \
 
 case "${1:-}" in
   serve|watch)
-    echo "mdbook が起動しました: http://localhost:${PORT}"
-    echo "停止するには: ./mdbook.sh stop"
+    echo "mdbook started: http://localhost:${PORT}"
+    echo "To stop: ./mdbook.sh stop"
     ;;
 esac

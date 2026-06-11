@@ -11,3 +11,4 @@
   - [ADR-0006: イメージタグ戦略](adr/ADR-0006-image-tag-strategy.md)
   - [ADR-0007: GitHub Actions のキャッシュ戦略](adr/ADR-0007-gha-cache-strategy.md)
   - [ADR-0008: PlantUML 日本語フォントのインストール方式](adr/ADR-0008-japanese-font-install.md)
+  - [ADR-0009: mdbook 日本語検索のトークナイザー選定](adr/ADR-0009-japanese-search-tokenizer.md)

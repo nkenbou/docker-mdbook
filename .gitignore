@@ -1,3 +1,4 @@
 .vscode/
 docs/book/
 docs/.mdbook-plantuml-cache/
+node_modules/

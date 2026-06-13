@@ -1,0 +1,16 @@
+{
+  "name": "docker-mdbook",
+  "private": true,
+  "type": "module",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.5.3",
+      "onFail": "download"
+    }
+  },
+  "dependencies": {
+    "elasticlunr": "^0.9.5",
+    "lunr-languages": "github:nkenbou/lunr-languages"
+  }
+}

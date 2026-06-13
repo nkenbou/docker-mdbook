@@ -12,4 +12,4 @@ command = "mdbook-mermaid"
 
 [output.html]
 additional-css = [".mdbook/custom.css"]
-additional-js = [".mdbook/mermaid.min.js", ".mdbook/mermaid-init.js"]
+additional-js = [".mdbook/mermaid.min.js", ".mdbook/mermaid-init.js", ".mdbook/lunr.stemmer.support.min.js", ".mdbook/lunr.ja.min.js", ".mdbook/search-ja-activate.js"]

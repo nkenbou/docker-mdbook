@@ -21,11 +21,18 @@ RUN wget -q -O /plantuml.jar \
     https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_VERSION}/plantuml-${PLANTUML_VERSION}.jar \
     && echo "${PLANTUML_SHA256}  /plantuml.jar" | sha256sum -c -
 
+FROM node:lts-bookworm-slim AS node-builder
+WORKDIR /app
+COPY package.json pnpm-lock.yaml build-searchindex.js ./
+RUN npm install -g pnpm \
+    && pnpm install --prod --frozen-lockfile --shamefully-hoist
+
 FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
     openjdk-17-jre-headless \
     graphviz \
     fonts-noto-cjk \
+    nodejs \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=downloader /plantuml.jar /usr/local/lib/plantuml.jar
 RUN printf '#!/bin/sh\n\
@@ -40,7 +47,22 @@ COPY --from=builder \
     /usr/local/cargo/bin/mdbook-plantuml \
     /usr/local/cargo/bin/mdbook-mermaid \
     /usr/local/bin/
+COPY --from=node-builder /app /usr/local/lib/docker-mdbook
+COPY search-ja-activate.js /usr/local/lib/docker-mdbook/
+RUN printf '#!/bin/sh\n\
+set -e\n\
+case "${1:-}" in\n\
+  build)\n\
+    mdbook "$@"\n\
+    node /usr/local/lib/docker-mdbook/build-searchindex.js /book/book\n\
+    ;;\n\
+  *)\n\
+    exec mdbook "$@"\n\
+    ;;\n\
+esac\n' \
+    > /usr/local/bin/docker-mdbook \
+    && chmod +x /usr/local/bin/docker-mdbook
 RUN useradd -m -u 1000 mdbook
 USER mdbook
 WORKDIR /book
-ENTRYPOINT ["mdbook"]
+ENTRYPOINT ["docker-mdbook"]

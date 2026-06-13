@@ -48,6 +48,12 @@ COPY --from=builder \
     /usr/local/cargo/bin/mdbook-mermaid \
     /usr/local/bin/
 COPY --from=node-builder /app /usr/local/lib/docker-mdbook
+RUN mkdir -p /usr/local/lib/docker-mdbook/assets /tmp/mermaid-install \
+    && echo '[book]' > /tmp/mermaid-install/book.toml \
+    && mdbook-mermaid install /tmp/mermaid-install \
+    && cp /tmp/mermaid-install/mermaid.min.js /tmp/mermaid-install/mermaid-init.js \
+       /usr/local/lib/docker-mdbook/assets/ \
+    && rm -rf /tmp/mermaid-install
 COPY search-ja-activate.js /usr/local/lib/docker-mdbook/
 RUN printf '#!/bin/sh\n\
 set -e\n\

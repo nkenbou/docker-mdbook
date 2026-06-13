@@ -22,24 +22,19 @@ case "${1:-}" in
   install-assets)
     WORK_DIR=$(mktemp -d)
     trap 'rm -rf "${WORK_DIR}"' EXIT
-    echo '[book]' > "${WORK_DIR}/book.toml"
-    docker run --rm \
-      --entrypoint mdbook-mermaid \
-      --user "$(id -u):$(id -g)" \
-      -v "${WORK_DIR}:/work" \
-      "${IMAGE}" \
-      install /work
-    cp "${WORK_DIR}/mermaid.min.js"  "${BOOK_DIR}/.mdbook/mermaid.min.js"
-    cp "${WORK_DIR}/mermaid-init.js" "${BOOK_DIR}/.mdbook/mermaid-init.js"
-    echo "Updated mermaid assets."
     docker run --rm \
       --entrypoint sh \
       --user "$(id -u):$(id -g)" \
       -v "${WORK_DIR}:/work" \
       "${IMAGE}" \
-      -c 'cp /usr/local/lib/docker-mdbook/node_modules/lunr-languages/min/lunr.stemmer.support.min.js /work/ \
+      -c 'cp /usr/local/lib/docker-mdbook/assets/mermaid.min.js /work/ \
+       && cp /usr/local/lib/docker-mdbook/assets/mermaid-init.js /work/ \
+       && cp /usr/local/lib/docker-mdbook/node_modules/lunr-languages/min/lunr.stemmer.support.min.js /work/ \
        && cp /usr/local/lib/docker-mdbook/node_modules/lunr-languages/min/lunr.ja.min.js /work/ \
        && cp /usr/local/lib/docker-mdbook/search-ja-activate.js /work/'
+    cp "${WORK_DIR}/mermaid.min.js"  "${BOOK_DIR}/.mdbook/mermaid.min.js"
+    cp "${WORK_DIR}/mermaid-init.js" "${BOOK_DIR}/.mdbook/mermaid-init.js"
+    echo "Updated mermaid assets."
     cp "${WORK_DIR}/lunr.stemmer.support.min.js" "${BOOK_DIR}/.mdbook/lunr.stemmer.support.min.js"
     cp "${WORK_DIR}/lunr.ja.min.js"              "${BOOK_DIR}/.mdbook/lunr.ja.min.js"
     cp "${WORK_DIR}/search-ja-activate.js"       "${BOOK_DIR}/.mdbook/search-ja-activate.js"

@@ -2,7 +2,7 @@
 
 🇺🇸 [English](./README.md) | 🇯🇵 日本語
 
-mdBook をビルド・プレビューするための Docker イメージです。PlantUML、Mermaid、日本語フォントをコンテナ内で完結して利用できます。
+mdBook をビルド・プレビューするための Docker イメージです。PlantUML、Mermaid、CJK フォント、多言語対応検索をコンテナ内で完結して利用できます。
 
 ## イメージ構成
 
@@ -65,6 +65,41 @@ docker run --rm -v $(pwd):/book --user $(id -u):$(id -g) \
 # ライブプレビュー
 docker run --rm -v $(pwd):/book -p 3000:3000 --user $(id -u):$(id -g) \
   ghcr.io/nkenbou/docker-mdbook:latest serve --hostname 0.0.0.0
+```
+
+## 自プロジェクトへの導入
+
+既存の mdBook プロジェクトに docker-mdbook を組み込むには、このリポジトリから 2 つのファイルをコピーして言語コードを書き換えます。
+
+### 1. ラッパースクリプトのコピー
+
+`mdbook.sh` をプロジェクトルートにコピーし、`BOOK_DIR` 変数をドキュメントディレクトリのパスに合わせて変更します（デフォルトはスクリプトと同階層の `docs/`）。
+
+### 2. 言語対応検索の有効化
+
+`docs/theme/head.hbs` を自プロジェクトの `<book-dir>/theme/head.hbs` にコピーします。このファイルが言語別の検索アセットを読み込みます。`ja` の部分を使用言語コードに書き換えてください（3 箇所）。
+
+| ファイル | 変更箇所 |
+|---|---|
+| `theme/head.hbs` | `lunr.ja.min.js` → `lunr.<lang>.min.js` |
+| `theme/head.hbs` | `window.lunr.ja` → `window.lunr.<lang>`（2 箇所） |
+| `mdbook.sh`（`install-assets` ブロック） | `lunr.ja.min.js` → `lunr.<lang>.min.js` |
+
+サポートされている言語コードは [lunr-languages](https://github.com/nkenbou/lunr-languages) を参照してください（`fr`・`de`・`zh`・`ko`・`es` など）。
+
+また、検索インデックスビルダーが言語を自動検出できるよう、`book.toml` にも `language` を設定します。
+
+```toml
+[book]
+language = "ja"  # 使用言語コードに変更
+```
+
+### 3. アセットのインストール
+
+以下のコマンドを一度実行すると（イメージ更新後も再実行）、検索・Mermaid 用アセットが `<book-dir>/.mdbook/` にコピーされます。
+
+```sh
+./mdbook.sh install-assets
 ```
 
 ## イメージの取得

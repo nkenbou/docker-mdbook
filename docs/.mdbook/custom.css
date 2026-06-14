@@ -9,3 +9,62 @@
 .table-wrapper:has(+ .table-wrapper) {
   margin-bottom: 1em;
 }
+
+/* Right-side page TOC pane */
+.toc-inline {
+  box-sizing: border-box;
+  position: fixed;
+  top: calc(var(--menu-bar-height, 50px) + 1.5rem);
+  right: 0;
+  width: 180px;
+  padding: 0 0.75rem;
+  max-height: calc(100vh - var(--menu-bar-height, 50px) - 3rem);
+  overflow-y: auto;
+  font-size: 0.8em;
+  line-height: 1.6;
+  border-left: 1px solid var(--table-border-color);
+}
+
+.toc-inline::before {
+  content: "このページの内容";
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}
+
+@media (min-width: 1101px) {
+  .content main {
+    padding-right: 200px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .toc-inline { display: none; }
+}
+
+.toc-inline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-inline li { margin: 0; }
+
+.toc-inline ul ul { padding-left: 0.8em; }
+
+.toc-inline a {
+  display: block;
+  padding: 2px 0;
+  color: var(--fg);
+  text-decoration: none;
+  opacity: 0.65;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toc-inline a:hover { opacity: 1; }

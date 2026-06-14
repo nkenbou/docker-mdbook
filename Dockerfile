@@ -1,6 +1,7 @@
 ARG MDBOOK_VERSION=0.5.3
 ARG MDBOOK_PLANTUML_VERSION=2.0.0
 ARG MDBOOK_MERMAID_VERSION=0.17.0
+ARG MDBOOK_TOC_VERSION=0.15.4
 ARG PLANTUML_VERSION=1.2026.5
 ARG PLANTUML_SHA256=de65ffc34b5c7fdad4e86309ce2dcceff98778799ae17b93a8f492d7a69080e1
 
@@ -8,9 +9,11 @@ FROM rust:slim-bookworm AS builder
 ARG MDBOOK_VERSION
 ARG MDBOOK_PLANTUML_VERSION
 ARG MDBOOK_MERMAID_VERSION
+ARG MDBOOK_TOC_VERSION
 RUN cargo install mdbook --version ${MDBOOK_VERSION}
 RUN cargo install mdbook-plantuml --version ${MDBOOK_PLANTUML_VERSION} --no-default-features
 RUN cargo install mdbook-mermaid --version ${MDBOOK_MERMAID_VERSION}
+RUN cargo install mdbook-toc --version ${MDBOOK_TOC_VERSION}
 
 FROM debian:bookworm-slim AS downloader
 ARG PLANTUML_VERSION
@@ -46,6 +49,7 @@ COPY --from=builder \
     /usr/local/cargo/bin/mdbook \
     /usr/local/cargo/bin/mdbook-plantuml \
     /usr/local/cargo/bin/mdbook-mermaid \
+    /usr/local/cargo/bin/mdbook-toc \
     /usr/local/bin/
 COPY --from=node-builder /app /usr/local/lib/docker-mdbook
 RUN mkdir -p /usr/local/lib/docker-mdbook/assets /tmp/mermaid-install \

@@ -4,6 +4,10 @@ authors = ["nkenbou"]
 language = "ja"
 src = "."
 
+[preprocessor.toc]
+command = "mdbook-toc"
+renderer = ["html"]
+
 [preprocessor.plantuml]
 plantuml-cmd = "plantuml"
 

@@ -10,6 +10,7 @@ A Docker image for building and previewing mdBook documentation. PlantUML, Merma
 |---|---|
 | Base image | `debian:bookworm-slim` |
 | [mdBook](https://github.com/rust-lang/mdBook) | Markdown documentation builder |
+| [mdbook-toc](https://github.com/badboy/mdbook-toc) | Per-page table of contents preprocessor |
 | [mdbook-plantuml](https://github.com/sytsereitsma/mdbook-plantuml) | PlantUML preprocessor |
 | [mdbook-mermaid](https://github.com/badboy/mdbook-mermaid) | Mermaid preprocessor |
 | [PlantUML](https://github.com/plantuml/plantuml) | Diagram generation (local execution) |

@@ -35,7 +35,7 @@ docker build -t docker-mdbook .
 
 | ステージ | ベースイメージ | 役割 |
 |---|---|---|
-| `builder` | `rust:slim-bookworm` | mdbook・mdbook-plantuml・mdbook-mermaid を cargo install |
+| `builder` | `rust:slim-bookworm` | mdbook・mdbook-toc・mdbook-plantuml・mdbook-mermaid を cargo install |
 | `downloader` | `debian:bookworm-slim` | PlantUML jar をダウンロード・検証 |
 | `node-builder` | `node:lts-bookworm-slim` | pnpm で elasticlunr・lunr-languages をインストール |
 | （最終ステージ） | `debian:bookworm-slim` | 全成果物を集約、`docker-mdbook` エントリーポイントを配置 |

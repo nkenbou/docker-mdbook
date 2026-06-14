@@ -10,6 +10,7 @@ mdBook をビルド・プレビューするための Docker イメージです�
 |---|---|
 | ベースイメージ | `debian:bookworm-slim` |
 | [mdBook](https://github.com/rust-lang/mdBook) | Markdown ドキュメントビルダー |
+| [mdbook-toc](https://github.com/badboy/mdbook-toc) | ページ内目次プリプロセッサ |
 | [mdbook-plantuml](https://github.com/sytsereitsma/mdbook-plantuml) | PlantUML プリプロセッサ |
 | [mdbook-mermaid](https://github.com/badboy/mdbook-mermaid) | Mermaid プリプロセッサ |
 | [PlantUML](https://github.com/plantuml/plantuml) | ダイアグラム生成（ローカル実行） |

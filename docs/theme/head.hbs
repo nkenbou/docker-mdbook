@@ -1,0 +1,22 @@
+<script src="{{path_to_root}}.mdbook/elasticlunr.min.js"></script>
+<script src="{{path_to_root}}.mdbook/lunr.stemmer.support.min.js"></script>
+<script src="{{path_to_root}}.mdbook/lunr.ja.min.js"></script>
+<script>
+(function () {
+  if (window.lunr && window.lunr.ja) {
+    window.elasticlunr.tokenizer = window.lunr.ja.tokenizer;
+  }
+  var _lunr = window.lunr;
+  var _elasticlunr = window.elasticlunr;
+  Object.defineProperty(window, "lunr", {
+    get: function () { return _lunr; },
+    configurable: true,
+    enumerable: true
+  });
+  Object.defineProperty(window, "elasticlunr", {
+    get: function () { return _elasticlunr; },
+    configurable: true,
+    enumerable: true
+  });
+})();
+</script>

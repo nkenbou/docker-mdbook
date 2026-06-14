@@ -29,15 +29,15 @@ case "${1:-}" in
       "${IMAGE}" \
       -c 'cp /usr/local/lib/docker-mdbook/assets/mermaid.min.js /work/ \
        && cp /usr/local/lib/docker-mdbook/assets/mermaid-init.js /work/ \
+       && cp /usr/local/lib/docker-mdbook/node_modules/elasticlunr/elasticlunr.min.js /work/ \
        && cp /usr/local/lib/docker-mdbook/node_modules/lunr-languages/min/lunr.stemmer.support.min.js /work/ \
-       && cp /usr/local/lib/docker-mdbook/node_modules/lunr-languages/min/lunr.ja.min.js /work/ \
-       && cp /usr/local/lib/docker-mdbook/search-ja-activate.js /work/'
+       && cp /usr/local/lib/docker-mdbook/node_modules/lunr-languages/min/lunr.ja.min.js /work/'
     cp "${WORK_DIR}/mermaid.min.js"  "${BOOK_DIR}/.mdbook/mermaid.min.js"
     cp "${WORK_DIR}/mermaid-init.js" "${BOOK_DIR}/.mdbook/mermaid-init.js"
     echo "Updated mermaid assets."
+    cp "${WORK_DIR}/elasticlunr.min.js"          "${BOOK_DIR}/.mdbook/elasticlunr.min.js"
     cp "${WORK_DIR}/lunr.stemmer.support.min.js" "${BOOK_DIR}/.mdbook/lunr.stemmer.support.min.js"
     cp "${WORK_DIR}/lunr.ja.min.js"              "${BOOK_DIR}/.mdbook/lunr.ja.min.js"
-    cp "${WORK_DIR}/search-ja-activate.js"       "${BOOK_DIR}/.mdbook/search-ja-activate.js"
     echo "Updated lunr assets."
     exit 0
     ;;

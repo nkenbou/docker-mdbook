@@ -208,16 +208,17 @@ importers:
   .:
     dependencies:
       elasticlunr:
-        specifier: ^0.9.5
-        version: 0.9.5
+        specifier: github:weixsong/elasticlunr.js#v0.9.6
+        version: https://codeload.github.com/weixsong/elasticlunr.js/tar.gz/83b3d3538d0a9295e59806c48786d10a049bddf5
       lunr-languages:
         specifier: github:nkenbou/lunr-languages
         version: https://codeload.github.com/nkenbou/lunr-languages/tar.gz/e296a595be79c98667e53159fec2bda69052b545
 
 packages:
 
-  elasticlunr@0.9.5:
-    resolution: {integrity: sha512-5YM9LFQgVYfuLNEoqMqVWIBuF2UNCA+xu/jz1TyryLN/wmBcQSb+GNAwvLKvEpGESwgGN8XA1nbLAt6rKlyHYQ==}
+  elasticlunr@https://codeload.github.com/weixsong/elasticlunr.js/tar.gz/83b3d3538d0a9295e59806c48786d10a049bddf5:
+    resolution: {gitHosted: true, integrity: sha512-4Sq5v9KYFk9Rj0lv/Bm2P9ffjwurkzwxwLeyv17z7bMaduEyDw/u56ENK7r2mhRTRNAdBVPFGcMegxDiLEPhuA==, tarball: https://codeload.github.com/weixsong/elasticlunr.js/tar.gz/83b3d3538d0a9295e59806c48786d10a049bddf5}
+    version: 0.9.6
 
   lunr-languages@https://codeload.github.com/nkenbou/lunr-languages/tar.gz/e296a595be79c98667e53159fec2bda69052b545:
     resolution: {gitHosted: true, integrity: sha512-peLAKSpGhlmn1+5UFMOk6FUHECfKPlxB/5UWG67WaPpRARoE+6Vg0zROQ+p6Pp/J2g6zz6dIel1bFOPl40gyXg==, tarball: https://codeload.github.com/nkenbou/lunr-languages/tar.gz/e296a595be79c98667e53159fec2bda69052b545}
@@ -225,6 +226,6 @@ packages:
 
 snapshots:
 
-  elasticlunr@0.9.5: {}
+  elasticlunr@https://codeload.github.com/weixsong/elasticlunr.js/tar.gz/83b3d3538d0a9295e59806c48786d10a049bddf5: {}
 
   lunr-languages@https://codeload.github.com/nkenbou/lunr-languages/tar.gz/e296a595be79c98667e53159fec2bda69052b545: {}

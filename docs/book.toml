@@ -11,9 +11,9 @@ plantuml-cmd = "plantuml"
 command = "mdbook-mermaid"
 
 [output.html]
+theme = "theme"
 additional-css = [".mdbook/custom.css"]
 additional-js = [
   ".mdbook/mermaid.min.js",
   ".mdbook/mermaid-init.js",
 ]
-theme = "theme"

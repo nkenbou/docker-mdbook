@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-mdBook を PlantUML・Mermaid・日本語フォント付きで実行するための Docker イメージと、その自己ドキュメント (`docs/`) を管理するリポジトリ。
+mdBook を PlantUML・Mermaid・CJK フォント・多言語検索付きで実行するための Docker イメージと、その自己ドキュメント (`docs/`) を管理するリポジトリ。
 
 ## 主なコマンド
 
@@ -46,14 +46,14 @@ docker build -t docker-mdbook .
 
 `build` サブコマンドが渡された場合のみ `mdbook build` の直後に `build-searchindex.js` を実行する。それ以外のサブコマンドは `mdbook` にそのまま委譲する。
 
-### 日本語検索パイプライン
+### 多言語検索パイプライン
 
-mdbook 組み込みの検索インデックス（elasticlunr）は日本語非対応のため、ビルド後に日本語対応インデックスへ差し替える 2 層構造をとる。
+mdbook 組み込みの検索インデックス（elasticlunr）は英語以外の言語に対して精度が低いため、ビルド後に言語対応インデックスへ差し替える 2 層構造をとる。対象言語は `book.toml` の `language` フィールドから自動検出する（`en` の場合は処理をスキップ）。
 
-1. **インデックス再生成（ビルド時）**: `build-searchindex.js` が `Intl.Segmenter('ja', { granularity: 'word' })` で日本語テキストを分割し、`docs/book/searchindex-*.js` を上書きする。
-2. **クエリ処理（ブラウザ実行時）**: `docs/.mdbook/lunr.ja.min.js` が同じ `Intl.Segmenter` ロジックを elasticlunr のパイプラインに組み込む。`docs/theme/head.hbs` がこのスクリプト群を注入し、elasticlunr と lunr のグローバル変数の競合を防ぐ。
+1. **インデックス再生成（ビルド時）**: `build-searchindex.js` が `lunr-languages/lunr.<lang>.js` のトークナイザーを elasticlunr に組み込み、`docs/book/searchindex-*.js` を上書きする。
+2. **クエリ処理（ブラウザ実行時）**: `docs/.mdbook/lunr.<lang>.min.js` が同じトークナイザーを elasticlunr のパイプラインに組み込む。`docs/theme/head.hbs` がこのスクリプト群を注入し、elasticlunr と lunr のグローバル変数の競合を防ぐ。
 
-詳細な意思決定は [ADR-0009](docs/adr/ADR-0009-japanese-search-tokenizer.md) を参照。
+詳細な意思決定は [ADR-0009](docs/adr/ADR-0009-japanese-search-tokenizer.md) を参照（日本語向けの設計が基盤）。
 
 ### 静的アセット管理
 

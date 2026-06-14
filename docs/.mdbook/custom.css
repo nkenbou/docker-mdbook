@@ -15,14 +15,15 @@
   box-sizing: border-box;
   position: fixed;
   top: calc(var(--menu-bar-height, 50px) + 1.5rem);
-  right: 0;
-  width: 180px;
+  right: 115px; /* nav-chapters.next: right:15px + min-width:90px + 10px buffer */
+  width: 155px;
   padding: 0 0.75rem;
   max-height: calc(100vh - var(--menu-bar-height, 50px) - 3rem);
   overflow-y: auto;
   font-size: 0.8em;
   line-height: 1.6;
   border-left: 1px solid var(--table-border-color);
+  background-color: var(--bg);
 }
 
 .toc-inline::before {
@@ -38,7 +39,8 @@
 
 @media (min-width: 1101px) {
   .content main {
-    padding-right: 200px;
+    padding-left: 100px;
+    padding-right: 280px; /* 115 (toc right) + 155 (toc width) + 10 buffer */
   }
 }
 

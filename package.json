@@ -3,9 +3,14 @@
   "private": true,
   "type": "module",
   "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=18",
+      "onFail": "warn"
+    },
     "packageManager": {
       "name": "pnpm",
-      "version": "^11.5.3",
+      "version": "^11.0.0",
       "onFail": "warn"
     }
   },
